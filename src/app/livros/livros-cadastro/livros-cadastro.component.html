@@ -1,0 +1,110 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Cadastro de livros</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+  
+    <form [formGroup]="livrosForm">
+      <ion-item>
+        <ion-label position="floating">Título: </ion-label>
+        <ion-input formControlName="titulo"
+                   autofocus=true
+                   type="text">
+        </ion-input>
+        <!-- <ion-text color="danger" *ngIf="titulo.errors">
+          <small *ngIf="titulo.errors.required && (titulo.dirty || titulo.touched)">
+            O campo título é obrigatório
+          </small>
+          <small *ngIf="titulo.errors.minlength && (titulo.dirty || titulo.touched)">
+            O campo título deve conter no mínimo {{titulo.errors.minlength.requiredLength}} caracteres
+          </small>
+          <small *ngIf="titulo.errors.maxlength && (titulo.dirty || titulo.touched)">
+            O campo título deve conter no máximo {{titulo.errors.maxlength.requiredLength}} caracteres
+          </small>
+        </ion-text> -->
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">ISBN: </ion-label>
+        <ion-input formControlName="isbn"
+                   type="tel">
+        </ion-input>
+        <!-- <ion-text color="danger" *ngIf="isbn.errors">
+          <small *ngIf="isbn.errors.required && (isbn.dirty || isbn.touched)">
+            O campo ISBN é obrigatório
+          </small>
+          <small *ngIf="isbn.errors.minlength && (isbn.dirty || isbn.touched)">
+            O campo ISBN deve conter no mínimo {{isbn.errors.minlength.requiredLength}} caracteres
+          </small>
+          <small *ngIf="isbn.errors.maxlength && (isbn.dirty || isbn.touched)">
+            O campo ISBN deve conter no máximo {{isbn.errors.maxlength.requiredLength}} caracteres
+          </small>
+        </ion-text> -->
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Nº de páginas: </ion-label>
+        <ion-input formControlName="numeroPaginas"
+                   type="number">
+        </ion-input>
+        <!-- <ion-text color="danger" *ngIf="numeroPaginas.errors">
+          <small *ngIf="numeroPaginas.errors.required && (numeroPaginas.dirty || numeroPaginas.touched)">
+            O campo Nº de páginas é obrigatório
+          </small>
+        </ion-text> -->
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Autores: </ion-label>
+        <ion-select value={toppings} multiple={true} cancelText="Cancelar" okText="OK">
+            <ion-select-option value="2">David Cockford</ion-select-option>
+        </ion-select>
+        <!-- <ion-input formControlName="autores"
+                   type="tel">
+        </ion-input> -->
+        <!-- <ion-text color="danger" *ngIf="autores.errors">
+          <small *ngIf="autores.errors.required && (autores.dirty || autores.touched)">
+            O campo Autores é obrigatório
+          </small>
+        </ion-text> -->
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Preço</ion-label>
+        <ion-input formControlName="preco"
+                   inputmode="decimal"
+                   value="0.00"
+                   type="number">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">URL da logo: </ion-label>
+        <ion-input formControlName="logoUrl"
+                   clearInput=true
+                   type="url">
+        </ion-input>
+        <!-- <ion-text color="danger" *ngIf="titulo.errors">
+          <small *ngIf="titulo.errors.required && (titulo.dirty || titulo.touched)">
+            O campo título é obrigatório
+          </small>
+          <small *ngIf="titulo.errors.minlength && (titulo.dirty || titulo.touched)">
+            O campo título deve conter no mínimo {{titulo.errors.minlength.requiredLength}} caracteres
+          </small>
+          <small *ngIf="titulo.errors.maxlength && (titulo.dirty || titulo.touched)">
+            O campo título deve conter no máximo {{titulo.errors.maxlength.requiredLength}} caracteres
+          </small>
+        </ion-text> -->
+      </ion-item>
+  
+      <ion-fab vertical="bottom"
+               horizontal="end">
+        <ion-fab-button (click)="salvar()" [disabled]="!livrosForm.valid">
+          <ion-icon name="checkmark-outline" tootip="Teste"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+    </form>
+  </ion-content>
