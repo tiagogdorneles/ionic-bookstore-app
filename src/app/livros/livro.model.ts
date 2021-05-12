@@ -5,7 +5,7 @@ export class Livro {
     titulo: string;
     isbn: string;
     numeroPaginas: number;
-    autores: string[];
+    autores: Autor[];
     preco: number;
     logoUrl: string;
 }

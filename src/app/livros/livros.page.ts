@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, IonItemSliding, ToastController } from '@ionic/angular';
+import { Autor } from '../autores/autor.model';
+import { AutorService } from '../autores/autor.service';
 import { Livro } from './livro.model';
 import { LivroService } from './livro.service';
 
@@ -17,6 +19,7 @@ export class LivrosPage implements OnInit {
     private alertController: AlertController,
     private toastController: ToastController,
     private livroService: LivroService,
+    private autorService: AutorService,
     private routerService: Router
   ) { }
 
@@ -75,6 +78,16 @@ export class LivrosPage implements OnInit {
         }
       );
     
+  }
+
+  getAutor(autorId: number) {
+    var teste;
+    this.autorService
+         .getAutor(autorId)
+         .subscribe((autor) => {
+          teste = autor.nome;
+         });
+    return teste;
   }
 
   ionViewWillEnter() {

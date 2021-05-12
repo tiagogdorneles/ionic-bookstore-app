@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { Autor } from 'src/app/autores/autor.model';
+import { AutorService } from 'src/app/autores/autor.service';
 import { Livro } from '../livro.model';
 import { LivroService } from '../livro.service';
 
@@ -11,39 +13,13 @@ import { LivroService } from '../livro.service';
   styleUrls: ['./livros-cadastro.component.scss'],
 })
 export class LivrosCadastroComponent implements OnInit {
-//   mesesAbreviados = [
-//     'Jan',
-//     'Fev',
-//     'Mar',
-//     'Abr',
-//     'Mai',
-//     'Jun',
-//     'Jul',
-//     'Ago',
-//     'Set',
-//     'Out',
-//     'Nov',
-//     'Dez',
-//   ];
-//   meses = [
-//     'Janeiro',
-//     'Fevereiro',
-//     'Março',
-//     'Abril',
-//     'Maio',
-//     'Junho',
-//     'Julho',
-//     'Agosto',
-//     'Setembro',
-//     'Outubro',
-//     'Novembro',
-//     'Dezembro'
-//   ];
 
+  private autores: Autor[];
   livroId: number;
   livrosForm: FormGroup;
 
   constructor(
+    private autorService: AutorService,
     private toastController: ToastController,
     private activatedRoute: ActivatedRoute,
     private livroService: LivroService,
@@ -53,17 +29,18 @@ export class LivrosCadastroComponent implements OnInit {
     let livro = {
       id: null,
       titulo: ' ',
-      isbn: '',
-      numeroPaginas: 0,
+      isbn: ' ',
+      numeroPaginas: null,
       autores: [],
-      preco: 0,
-      logoUrl:''
+      preco: null,
+      logoUrl:' '
     };
     this.inicializaFormulario(livro);
    }
 
    ngOnInit() {
      const id = this.activatedRoute.snapshot.paramMap.get('id');
+     this.autorService.getAutores().subscribe(autores => this.autores = autores);
      if (id) {
         this.livroId = parseInt(id);
         this.livroService
@@ -72,8 +49,9 @@ export class LivrosCadastroComponent implements OnInit {
            this.inicializaFormulario(livro);
          });
      }
-     
    }
+
+  
 
   inicializaFormulario(livro: Livro) {
     this.livrosForm = new FormGroup({
@@ -82,7 +60,7 @@ export class LivrosCadastroComponent implements OnInit {
       numeroPaginas: new FormControl(livro.numeroPaginas, Validators.required),
       autores: new FormControl(livro.autores, Validators.required),
       preco: new FormControl(livro.preco, [Validators.required, Validators.min(0.01)]),
-      logoUrl: new FormControl(livro.logoUrl, [Validators.required, Validators.minLength(7)]),
+      logoUrl: new FormControl(livro.logoUrl, [Validators.required, Validators.minLength(7)])
     });
   }
 

@@ -20,9 +20,15 @@
               <strong>{{livro.titulo}}</strong>
             </h2>
           </ion-text>
-          <h3>Autor(es):<br> <ion-text color="medium">{{livro.autores}}</ion-text></h3>
-          <ion-text color="danger">{{livro.preco | number : '1.2-2' : 'br'}}</ion-text>
-          <br>
+          <h3>Autor(es):</h3>
+          <p *ngFor="let autor of livro.autores">
+            <small>
+              <ion-text color="medium">{{autor.nome}}</ion-text>
+            </small>
+          </p>
+          <!-- <h3>Autor(es):</h3> <small><ion-text color="medium">{{autor.nome}}</ion-text></small> -->
+          <!-- <h3>Autor(es):</h3> <ion-text color="medium">{getAutor(livro.autores)}</ion-text> -->
+          <h3>Preço: <ion-text color="danger">{{livro.preco | number : '1.2-2' : 'br'}}</ion-text></h3>
           <small>
             ISBN: <ion-text color="medium">{{livro.isbn}}</ion-text>
           </small>
@@ -49,19 +55,6 @@
       </ion-item-options>
 
     </ion-item-sliding>
-
-    <!-- <ion-item *ngFor="let livro of livros">
-      <ion-label>{{livro.titulo}}</ion-label>
-      <ion-buttons>
-        <ion-button color="primary" [routerLink]="['edicao', livro.id]">
-          <ion-icon name="create" slot="icon-only"></ion-icon>
-        </ion-button>
-        <ion-button color="primary" (click)="confirmarExclusao(livro)">
-          <ion-icon name="trash" slot="icon-only"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-
-    </ion-item> -->
   </ion-list>
 
   <ion-fab vertical="bottom" horizontal="end">
